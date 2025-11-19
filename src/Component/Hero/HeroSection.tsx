@@ -1,3 +1,4 @@
+import '../../index.css'
 
 const HeroSection = () => {
   return (
@@ -6,7 +7,7 @@ const HeroSection = () => {
         <h1 className="text-5xl font-bold text-gray-900 leading-snug mb-4">
           Discover <br />
           <span className="text-purple-600 text-8xl">FASHION </span>
-            That Defines You
+            <p>That Defines You</p>
         </h1>
         <p className="text-gray-700 mb-6">
           Discover a world of fashion and style with our curated collection of apparel.
