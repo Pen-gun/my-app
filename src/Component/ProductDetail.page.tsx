@@ -41,39 +41,14 @@ const ProductDetail = () => {
                     >
                         Add to Cart
                     </button>
-                    <button
+                    {/* <button
                         className="bg-red-600 text-black px-4 py-2 rounded-md hover:bg-red-700 transition ml-4"
                         aria-label="Buy product"
                     >
                         Buy
-                    </button>
+                    </button> */}
             </div>
-            {/* <input
-                type="number"
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-                className="border border-gray-300 rounded-md p-2 mb-4 w-full"
-                placeholder="Enter new price"
-            /> */}
-            {/* <button onClick={updateProduct}>Update</button>
-            <button onClick={() => DeleteProduct(Number(product.id))}>Delete</button> */}
-            {/* <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-md px-6">
-                <div className="bg-white rounded-lg shadow-md p-4 flex justify-center">
-                    <button
-                        className="bg-indigo-600 text-black px-4 py-2 rounded-md hover:bg-indigo-700 transition"
-                        onClick={handleAddToCart}
-                        aria-label="Add product to cart"
-                    >
-                        Add to Cart
-                    </button>
-                    <button
-                        className="bg-red-600 text-black px-4 py-2 rounded-md hover:bg-red-700 transition ml-4"
-                        aria-label="Buy product"
-                    >
-                        Buy
-                    </button>
-                </div>
-            </div> */}
+           
         </div>
 
     );
