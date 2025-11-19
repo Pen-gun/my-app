@@ -1,6 +1,5 @@
 // (no React hooks needed here)
 import { GetSingleUser } from "../../Hooks/UserHook";
-import {useLogout} from '../../Hooks/AuthHook'
 import { getUserFromToken } from "../Cart/decodeJwt";
 
 const GetSingle = () => {
@@ -16,7 +15,6 @@ const GetSingle = () => {
   }
   if (!token) token = sessionStorage.getItem('authToken')
   const UID = getUserFromToken(token).id;
-  const logout = useLogout();
   const id = UID || 0;
   const { data: user, isLoading, isError } = GetSingleUser(id);
 
@@ -48,13 +46,10 @@ const GetSingle = () => {
               <div className="text-sm text-gray-500">ID</div>
               <div className="text-lg font-semibold">{user.id}</div>
             </div>
-            <button onClick={logout} className="bg-red-200 text-black px-3 py-1 rounded-md">
-              Logout
-            </button>
           </div>
         </div>
       ) : (
-        <div className="text-gray-600">No user found for this ID.</div>
+        <div className="pt-50 text-gray-600 text-center">No user found for this ID.</div>
       )}
     </div>
   );

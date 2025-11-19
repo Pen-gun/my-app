@@ -108,7 +108,7 @@ const MainCart = () => {
 
 
   if (resolvingUser || cartsQuery.isLoading || itemsQuery.isLoading) return <div className="p-4">Loading cart…</div>
-  if (!userId) return <div className="p-4 text-gray-600">No logged-in user found. Please login to see your cart.</div>
+  if (!userId) return <div className="pt-50 text-gray-600 text-center">No logged-in user found. Please login to see your cart.</div>
   if (cartsQuery.isError) return <div className="p-4 text-red-600">Failed to load carts</div>
   if (itemsQuery.isError) return <div className="p-4 text-red-600">Failed to load cart items</div>
 

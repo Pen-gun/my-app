@@ -21,7 +21,7 @@ export default function Product(){
                 <div>Loading...</div>
             ) : (   
                 products.map((product: any) => (
-                <article key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition p-4 flex flex-col hover:cursor-pointer"
+                <article key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition p-4 flex flex-col hover:cursor-pointer hover:scale-[1.02] hover:bg-gray-100"
                 onClick={() => handelClick(product.id)}
                 role="button"
                 style={{cursor: 'pointer'}}

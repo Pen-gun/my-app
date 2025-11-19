@@ -51,36 +51,35 @@ export default function NavLinks({ onClick }: NavLinksProps) {
       <Link
         to="/"
         onClick={onClick}
-        className="text-gray-700 hover:text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
+        className="text-gray-700 hover:border-blue-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
       >
         Home
       </Link>
       <Link
         to="/cart"
         onClick={onClick}
-        className="text-gray-700 hover:text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
+        className="text-gray-700 hover:border-blue-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
       >
         Cart
       </Link>
       <Link
         to="/Users"
         onClick={onClick}
-        className="text-gray-700 hover:text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
+        className="text-gray-700 hover:border-blue-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
       >
         {displayName ? `${displayName}` : 'Users'}
       </Link>
       {displayName ? (
         <button
           onClick={() => { logout(); navigate('/login') }}
-          className="text-gray-700 hover:text-blue-600 hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
-        >
+          className='logout-button'>
           Logout
         </button>
       ) : (
         <Link
           to="/login"
           onClick={onClick}
-          className="text-gray-700 hover:text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
+          className="text-gray-700 hover:border-blue-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
         >
           Login
         </Link>

@@ -8,9 +8,11 @@ export const useAddToCart = () => {
         mutationKey:['add-cart'],
         mutationFn: async (cart: CartCreate) =>{
             const res= await axios.post('https://fakestoreapi.com/carts', cart);
+            console.log('Add to cart response:', res.data);
             return res.data;
         },
         onSuccess:() =>{
+            alert('Product added to cart successfully!');
             queryClient.invalidateQueries({queryKey: ['carts']});
         }
     })
