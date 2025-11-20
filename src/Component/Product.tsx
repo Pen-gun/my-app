@@ -1,16 +1,22 @@
 import '../App.css'
 import { ProductHook } from '../Hooks/ProductHook';
-import { useNavigate } from 'react-router-dom';
-
+import ProductDetail from './ProductDetail.page';
+import React from 'react';
 
 
 export default function Product(){
-    const navigate = useNavigate();
     
-    const { data: products, isLoading } = ProductHook();
+    const{ data: products, isLoading } = ProductHook();
+    const[isOpen, setIsOpen] = React.useState(false);
+    const [selected, setSelected] = React.useState<any | null>(null);
 
-    function handelClick(id: number) {
-        navigate('/product-detail/' + id);
+    function handelOpen(product: any) {
+      setSelected(product);
+      setIsOpen(true);
+    }
+    function handelClose() {
+      setIsOpen(false);
+      setSelected(null);
     }
 
     return (
@@ -22,7 +28,7 @@ export default function Product(){
             ) : (   
                 products.map((product: any) => (
                 <article key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition p-4 flex flex-col hover:cursor-pointer hover:scale-[1.02] hover:bg-gray-100"
-                onClick={() => handelClick(product.id)}
+                onClick={() => handelOpen(product)}
                 role="button"
                 style={{cursor: 'pointer'}}
                 tabIndex={0}>
@@ -48,6 +54,7 @@ export default function Product(){
                 </article>
             )))}
             </div>
+            <ProductDetail isOpen={isOpen} onClose={handelClose} product={selected} />
         </div>
     );
 }

@@ -11,7 +11,6 @@ import HomePage from './Pages/HomePage'
 import LoginPageWrapper from'./Pages/LoginPage.page'
 import UserPageWrapper from './Pages/UserPage.page'
 import MainCart from './Component/Cart/MainCart'
-import ProductDetailMain from './Pages/ProductDetailMain.page'
 
 const queryClient = new QueryClient()
 
@@ -26,7 +25,6 @@ export default function App() {
             <Route path="/initial" element={<Initial />} />
             <Route path="/products" element={<HomePage />} />
             <Route path="/insert-product" element={<InsertProduct />} />
-            <Route path="/product-detail/:id" element={<ProductDetailMain />} />
             <Route path="/LimitFetch" element ={<LimitFetch initialLimit={5}/>} />
             <Route path="/notUsers" element ={<AddNonUsers />} />
             <Route path="/cart" element ={<CartPageWrapper />} />
