@@ -11,15 +11,14 @@ import HomePage from './Pages/HomePage'
 import LoginPageWrapper from'./Pages/LoginPage.page'
 import UserPageWrapper from './Pages/UserPage.page'
 import MainCart from './Component/Cart/MainCart'
-
+import Footer from './Component/Footer'
 const queryClient = new QueryClient()
 
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-
-        <main className="max-w-7xl mx-auto p-4">
+        <div className="max-w-7xl mx-auto p-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/initial" element={<Initial />} />
@@ -32,7 +31,8 @@ export default function App() {
             <Route path="/login" element ={<LoginPageWrapper />} />
             <Route path="/MainCart" element ={<MainCart />} />
           </Routes>
-        </main>
+        </div>
+        <Footer />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )

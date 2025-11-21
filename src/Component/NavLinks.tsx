@@ -1,89 +1,94 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { getUserFromToken } from './Cart/decodeJwt'
-import { useLogout } from '../Hooks/AuthHook'
+"use client"
 
-type NavLinksProps = {
-  onClick?: () => void
+import { useState } from "react"
+import {Link} from "react-router-dom"
+import { Menu, X } from "lucide-react"
+
+type NavLink = {
+  label: string
+  to: string
 }
 
-export default function NavLinks({ onClick }: NavLinksProps) {
-  const navigate = useNavigate()
-  const logout = useLogout()
-  // Determine display name from possible session storage formats
-  let displayName: string | null = null
+const navLinks: NavLink[] = [
+  { label: "Home", to: "/" },
+  { label: "Cart", to: "/cart" },
+  { label: "Users", to: "/users" },
+]
 
-  try {
-    const sd = sessionStorage.getItem('sessionData')
-    if (sd) {
-      // sessionData may be a JSON string containing { token, username }
-      try {
-        const parsed = JSON.parse(sd)
-        if (parsed?.username) displayName = parsed.username
-        if (!displayName && parsed?.token) {
-          const u = getUserFromToken(parsed.token)
-          if (u?.username) displayName = u.username
-        }
-      } catch {
-        // not JSON, maybe a raw token
-        const u = getUserFromToken(sd)
-        if (u?.username) displayName = u.username
-      }
-    }
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
 
-    if (!displayName) {
-      const authToken = sessionStorage.getItem('authToken')
-      if (authToken) {
-        const u = getUserFromToken(authToken)
-        if (u?.username) displayName = u.username
-      }
-    }
-
-    if (!displayName) {
-      const authUsername = sessionStorage.getItem('authUsername')
-      if (authUsername) displayName = authUsername
-    }
-  } catch (e) {
-    console.warn('NavLinks: failed to read session storage', e)
-  }
+  const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <div className='fixed top-5 z-[1000] space-x-4 bg-white/70 backdrop-blur-md px-4 py-2 rounded-md shadow-md'>
-      <Link
-        to="/"
-        onClick={onClick}
-        className="text-gray-700 hover:border-blue-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
-      >
-        Home
-      </Link>
-      <Link
-        to="/cart"
-        onClick={onClick}
-        className="text-gray-700 hover:border-blue-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
-      >
-        Cart
-      </Link>
-      <Link
-        to="/Users"
-        onClick={onClick}
-        className="text-gray-700 hover:border-blue-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
-      >
-        {displayName ? `${displayName}` : 'Users'}
-      </Link>
-      {displayName ? (
-        <button
-          onClick={() => { logout(); navigate('/login') }}
-          className='logout-button'>
-          Logout
-        </button>
-      ) : (
-        <Link
-          to="/login"
-          onClick={onClick}
-          className="text-gray-700 hover:border-blue-600 px-3 py-2 rounded-md text-sm font-medium transition inline-block"
-        >
-          Login
-        </Link>
+    <nav className="fixed top-0 left-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 bg-color-gray-50/95">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo/Brand */}
+          <Link to="/" className="flex items-center gap-2 font-bold text-lg">
+            <span className="hidden sm:inline">classXNeedle</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Auth Actions */}
+          <div className="hidden md:flex items-center gap-2">
+            <Link
+              to="/login"
+              className="px-3 py-2 rounded-md text-sm font-medium transition-colors text-foreground hover:bg-accent hover:text-accent-foreground"
+            >
+              Login
+            </Link>   
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-foreground hover:bg-accent transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="md:hidden border-t border-border">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="block px-3 py-2 rounded-md text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground text-foreground"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="pt-2 border-t border-border space-y-1">
+              <Link
+                to="/login"
+                className="block px-3 py-2 rounded-md text-base font-medium transition-colors text-foreground hover:bg-accent hover:text-accent-foreground"
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </Link>
+            </div>
+          </div>
+        </div>
       )}
-    </div>
+    </nav>
   )
 }

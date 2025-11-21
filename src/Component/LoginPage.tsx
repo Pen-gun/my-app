@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useAuthHook } from '../Hooks/AuthHook'
 import { useNavigate } from 'react-router-dom'
+import { EyeClosed,EyeIcon } from 'lucide-react';
 
 export default function LoginPage() {
+    const inputRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -34,6 +36,9 @@ export default function LoginPage() {
             setIsSubmitting(false)
         }
     }
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
 
 
     return (
@@ -62,6 +67,7 @@ export default function LoginPage() {
                             onChange={(e) => setUsername(e.target.value)}
                             className="w-full border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                             placeholder="Username"
+                            ref={inputRef}
                         />
                     </div>
 
@@ -83,15 +89,15 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword((s) => !s)}
-                                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-gray-500 hover:text-gray-700"
+                                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
                                 aria-label={showPassword ? 'Hide password' : 'Show password'}
                             >
-                                {showPassword ? 'Hide' : 'Show'}
+                                {showPassword ? <EyeClosed /> : <EyeIcon />}
                             </button>
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between"> 
                     </div>
 
                     <div>
