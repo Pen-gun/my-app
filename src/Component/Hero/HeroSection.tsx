@@ -14,7 +14,7 @@ const HeroSection = () => {
         </p>
         <div className="flex items-center justify-center lg:justify-start space-x-4">
           <button 
-            className="bg-purple-600 text-black px-6 py-2 rounded-full font-medium hover:bg-purple-700 transition hover:cursor-pointer hover:scale-105"
+            className="bg-purple-600 text-white px-6 py-2 rounded-full font-medium hover:bg-purple-700 transition hover:cursor-pointer hover:scale-105"
             onClick={() => {
                 window.scrollTo({
                   top: 550,

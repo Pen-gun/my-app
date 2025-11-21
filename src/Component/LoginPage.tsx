@@ -104,11 +104,11 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-indigo-600 text-black px-4 py-2 rounded-md font-medium hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center hover:cursor-pointer hover:scale-105 transition"
+                            className="w-full bg-gray-600 text-white px-4 py-2 rounded-md font-medium hover:bg-gray-700 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center hover:cursor-pointer hover:scale-105 transition"
                         >
                             {isSubmitting ? (
                                 <svg
-                                    className="animate-spin h-5 w-5 mr-2 text-black"
+                                    className="animate-spin h-5 w-5 mr-2 text-white"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"

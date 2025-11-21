@@ -115,7 +115,7 @@ const ProductDetail = ({isOpen, onClose, product: productProp}: ModalProps) => {
                 </div>
 
                 <button
-                    className="bg-indigo-600 text-black px-4 py-2 mt-4 rounded-md hover:bg-indigo-700 transition"
+                    className="bg-indigo-600 text-white px-4 py-2 mt-4 rounded-md hover:bg-indigo-700 transition hover:cursor-pointer"
                     onClick={handleAddToCart}
                 >
                     Add to Cart
