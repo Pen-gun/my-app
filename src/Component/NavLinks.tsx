@@ -18,7 +18,7 @@ const navLinks: NavLink[] = [
 export default function Navbar() {
   const navigate = useNavigate();
   const logout = useLogout();
-  const isAuthenticated = sessionStorage.getItem("sessionData"); // Replace with actual authentication check
+  const isAuthenticated = Boolean(sessionStorage.getItem("sessionData")); // Replace with actual authentication check
   const [isOpen, setIsOpen] = useState(false)
   const toggleMenu = () => setIsOpen(!isOpen)
   const handleLogout = () => {
@@ -48,7 +48,7 @@ export default function Navbar() {
           </div>
 
           {/* Auth Actions */}
-          <div className="hidden md:flex item-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             {isAuthenticated ? (
               <button
                 onClick={handleLogout}
@@ -56,12 +56,14 @@ export default function Navbar() {
               >
                 Logout
               </button>
-            ) : <Link
-              to="/login"
-              className="px-3 py-2 rounded-md text-sm font-medium transition-colors text-foreground hover:bg-accent hover:text-accent-foreground hover:cursor-pointer hover:text-purple-600"
-            >
-              Login
-            </Link>}
+            ) : (
+              <Link
+                to="/login"
+                className="px-3 py-2 rounded-md text-sm font-medium transition-colors text-foreground hover:bg-accent hover:text-accent-foreground hover:cursor-pointer hover:text-purple-600"
+              >
+                Login
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -90,13 +92,22 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="pt-2 border-t border-border space-y-1">
-              <Link
-                to="/login"
-                className="block px-3 py-2 rounded-md text-base font-medium transition-colors text-foreground hover:bg-accent hover:text-accent-foreground"
-                onClick={() => setIsOpen(false)}
-              >
-                Login
-              </Link>
+              {isAuthenticated ? (
+                <button
+                  onClick={() => { setIsOpen(false); handleLogout(); }}
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors text-foreground hover:bg-accent"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="block px-3 py-2 rounded-md text-base font-medium transition-colors text-foreground hover:bg-accent hover:text-accent-foreground"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </div>
         </div>
