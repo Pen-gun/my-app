@@ -104,7 +104,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-indigo-600 text-black px-4 py-2 rounded-md font-medium hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center"
+                            className="w-full bg-indigo-600 text-black px-4 py-2 rounded-md font-medium hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center hover:cursor-pointer hover:scale-105 transition"
                         >
                             {isSubmitting ? (
                                 <svg

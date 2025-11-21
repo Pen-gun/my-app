@@ -1,8 +1,7 @@
-"use client"
-
 import { useState } from "react"
-import {Link} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Menu, X } from "lucide-react"
+import { useLogout } from "../Hooks/AuthHook"
 
 type NavLink = {
   label: string
@@ -15,11 +14,17 @@ const navLinks: NavLink[] = [
   { label: "Users", to: "/users" },
 ]
 
+
 export default function Navbar() {
+  const navigate = useNavigate();
+  const logout = useLogout();
+  const isAuthenticated = sessionStorage.getItem("sessionData"); // Replace with actual authentication check
   const [isOpen, setIsOpen] = useState(false)
-
   const toggleMenu = () => setIsOpen(!isOpen)
-
+  const handleLogout = () => {
+    logout();
+    navigate('/login')
+  }
   return (
     <nav className="fixed top-0 left-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 bg-color-gray-50/95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,13 +48,20 @@ export default function Navbar() {
           </div>
 
           {/* Auth Actions */}
-          <div className="hidden md:flex items-center gap-2">
-            <Link
+          <div className="hidden md:flex item-center gap-2">
+            {isAuthenticated ? (
+              <button
+                onClick={handleLogout}
+                className="bg-transparent px-3 py-2 rounded-md text-sm font-medium text-foreground hover:text-red-600 cursor-pointer"
+              >
+                Logout
+              </button>
+            ) : <Link
               to="/login"
               className="px-3 py-2 rounded-md text-sm font-medium transition-colors text-foreground hover:bg-accent hover:text-accent-foreground"
             >
               Login
-            </Link>   
+            </Link>}
           </div>
 
           {/* Mobile Menu Button */}
@@ -71,7 +83,7 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className="block px-3 py-2 rounded-md text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground text-foreground"
+                className="block px-3 py-2 rounded-md text-base font-medium transition-colors text-foreground hover:bg-accent hover:text-accent-foreground"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
